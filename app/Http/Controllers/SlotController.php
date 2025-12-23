@@ -16,7 +16,17 @@ class SlotController extends Controller
     public function store(Request $request)
     {
 
-        
+        $overlapExists = Slot::where('date', $request->date)
+            ->where(function ($query) use ($request) {
+                $query->where('start_time', '<', $request->end_time)
+                      ->where('end_time', '>', $request->start_time);
+            })
+            ->exists();
+
+        if ($overlapExists) {
+            return back()->withErrors('This slot overlaps with an existing slot.');
+        }
+
         $request->validate([
 
             'date'       => 'required|date',
