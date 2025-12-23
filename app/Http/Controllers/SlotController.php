@@ -15,6 +15,8 @@ class SlotController extends Controller
 
     public function store(Request $request)
     {
+
+        
         $request->validate([
 
             'date'       => 'required|date',
@@ -28,13 +30,14 @@ class SlotController extends Controller
         $end   = strtotime($request->end_time);
 
 
-        $totalMinutes = ($end - $start) / 60;
+        $totalMinutes = ($end - $start) / 60;      
 
 
         if ($totalMinutes < 60) {
             return back()->withErrors('Slot must be at least 1 hour long');
         }
 
+        
         Slot::create([
             'date'           => $request->date,
             'start_time'     => $request->start_time,
@@ -42,6 +45,7 @@ class SlotController extends Controller
             'total_minutes'  => $totalMinutes,
         ]);
 
+        
         return redirect()->back()->with('success', 'Slot created successfully');
     }
     
