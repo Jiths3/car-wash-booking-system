@@ -12,5 +12,7 @@ Route::get('/admin/slots/create' , [SlotController::class, 'create']);
 Route::post('/admin/slots', [SlotController::class, 'store']);
 
 
-Route::get('users/bookings/create', [BookingController::class, 'create']);
-Route::post('users/bookings', [BookingController::class, 'store']);
+// Route::get('users/bookings/create', [BookingController::class, 'create']);
+
+Route::post('/users/bookings', [BookingController::class, 'store']);
+Route::get('/users/slot', [SlotController::class, 'index']);

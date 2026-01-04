@@ -8,6 +8,18 @@ use Illuminate\Http\Request;
 class SlotController extends Controller
 {
 
+
+    public function index()
+    {
+        $slots = Slot::where('is_active', true)
+            ->orderBy('date')
+            ->orderBy('start_time')
+            ->get();
+
+        return view('users.slots.create', compact('slots'));
+    }
+
+
        public function create()
     {
         return view('admin.slots.create');
