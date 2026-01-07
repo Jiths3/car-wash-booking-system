@@ -33,7 +33,7 @@
                 }
 
                 Booking::create([
-                    'user_id' => 1, // temporary (auth later)
+                    'user_id' => auth()->id(), // temporary (auth later)
                     'slot_id' => $slot->id,
                     'vehicle_type' => $request->vehicle_type,
                     'duration' => $duration,
